@@ -12,30 +12,37 @@ const DEFAULT_POINT = {
 };
 
 function createEditPointOfferTemplate(offer) {
-    return offer !== null ? (
-        `<section class="event__section  event__section--offers">
-            <h3 class="event__section-title  event__section-title--offers">Offers</h3>
-            <div class="event__available-offers">
-                ${Array.from(new Set(offer)).map(([title, price]) => `<div class="event__offer-selector">
-                    <input class="event__offer-checkbox  visually-hidden" id="event-offer-train-1" type="checkbox" name="event-offer-train">
+    if (offer) { 
+        return (
+            `<section class="event__section  event__section--offers">
+                <h3 class="event__section-title  event__section-title--offers">Offers</h3>
+                <div class="event__available-offers">
+                    ${offer.map(([title, price]) => `<div class="event__offer-selector">
+                        <input class="event__offer-checkbox  visually-hidden" id="event-offer-train-1" type="checkbox" name="event-offer-train">
                         <label class="event__offer-label" for="event-offer-train-1">
                             <span class="event__offer-title">${title}</span>
                                 &plus;&euro;&nbsp;
                             <span class="event__offer-price">${price}</span>
                         </label>
-                </div>`).join('')}
-            </div>
-        </section>
-    `) : '';
+                    </div>`).join('')}
+                </div>
+            </section>`
+        ); 
+    }
+    return '';
 }
 
 function createEditPointPhotoTemplate(img) {
-    return img !== null ? (
-        `<div class="event__photos-container">
-            <div class="event__photos-tape">
-                ${img.map((path) => `<img class="event__photo" src="${path}" alt="Event photo">`)}
-            </div>
-        </div>`) : '';
+    if (img) { 
+        return (
+            `<div class="event__photos-container">
+                <div class="event__photos-tape">
+                    ${img.map((path) => `<img class="event__photo" src="${path}" alt="Event photo">`)}
+                </div>
+            </div>`
+        );
+    }
+    return '';
 }
 
 function createEditPointTemplate(point) {

@@ -3,15 +3,18 @@ import { createElement } from "../render";
 import { getTimeInHours, getTimeInMinutes } from "../utils";
 
 function createNewPointOfferTemplate(offer) {
-    return (
-        `<ul class="event__selected-offers">
-            ${Array.from(new Set(offer)).map(([title, price]) => `<li class="event__offer">
-                <span class="event__offer-title">${title}</span>
-                    &plus;&euro;&nbsp;
-                <span class="event__offer-price">${price}</span>
-            </li>`).join('')}
-        </ul>`
-    )
+    if (offer) {
+        return (
+            `<ul class="event__selected-offers">
+                ${offer.map(([title, price]) => `<li class="event__offer">
+                    <span class="event__offer-title">${title}</span>
+                        &plus;&euro;&nbsp;
+                    <span class="event__offer-price">${price}</span>
+                </li>`).join('')}
+            </ul>`
+        );
+    }
+    return '';
 }
 
 function createNewPointTemplate(point) {
@@ -23,9 +26,10 @@ function createNewPointTemplate(point) {
 
   const minutes = getTimeInMinutes(date.startTime, date.endTime);
 
-  const eventFavoriteClass = isFavorite && true ? 'event__favorite-btn--active' : '';
+  const eventFavoriteClass = isFavorite ? 'event__favorite-btn--active' : '';
 
-  return `<li class="trip-events__item">
+  return (
+        `<li class="trip-events__item">
             <div class="event">
                 <time class="event__date" datetime="${date.startTime}">${dayjs(date.startTime).format("DD MMM")}</time>
                 <div class="event__type">
@@ -57,7 +61,8 @@ function createNewPointTemplate(point) {
                     <span class="visually-hidden">Open event</span>
                 </button>
             </div>
-        </li>`;
+        </li>`
+    );
 }
 
 export default class PointView {

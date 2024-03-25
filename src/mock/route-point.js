@@ -2,13 +2,14 @@ import { TYPE_POINT, PRICE, OFFER, DATE, CITY } from '../const';
 import { getRandomArrayElement } from '../utils';
 import { getMockDestination } from './destination';
 
-const BOUND = 4;
+const BOUND = 5;
 
 function getRandomPoint() {
   const identity = Math.floor(Math.random() * CITY.size);
   const offerCount = Math.floor(Math.random() * BOUND + 1);
   return {
     id: identity,
+    city: CITY.get(identity),
     type: getRandomArrayElement(TYPE_POINT),
     price: getRandomArrayElement(PRICE),
     date: getRandomArrayElement(DATE),

@@ -47,9 +47,8 @@ function createEditPointPhotoTemplate(img) {
 }
 
 function createEditPointTemplate(point) {
-  const { type, price, date, destination, offer } = point;
-
-  const { city, description, img } = destination;
+  const { type, city, price, date, destination, offer } = point;
+  const { description, img } = destination;
 
   return (
     `<li class="trip-events__item">
@@ -112,9 +111,9 @@ function createEditPointTemplate(point) {
 }
 
 export default class EditPointView extends AbstractView {
-  #point;
-  #onEditPointReset;
-  #onEditPointSubmit;
+  #point = null;
+  #onEditPointReset = null;
+  #onEditPointSubmit = null;
 
   constructor({ point = DEFAULT_POINT, onEditPointReset, onEditPointSubmit }) {
     super();

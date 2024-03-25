@@ -4,13 +4,14 @@ import SortView from '../view/sort-view';
 import PointView from '../view/point-view';
 import PointsListView from '../view/points-list-view';
 import EditPointView from '../view/edit-point-view';
+import EmptyListView from '../view/empty-list-view';
 import { RenderPosition, render, replace } from '../framework/render';
 
 export default class TripPresenter {
   #listPoints = new PointsListView();
-  #containers;
-  #pointsModel;
-  #tripPoints;
+  #containers = null;
+  #pointsModel = null;
+  #tripPoints = null;
 
   constructor({ containers, pointsModel }) {
     this.#containers = containers;
@@ -20,11 +21,16 @@ export default class TripPresenter {
   init() {
     this.#tripPoints = [...this.#pointsModel.points];
 
-    render(new TripInfoView(), this.#containers.tripInfo, RenderPosition.AFTERBEGIN);
-    render(new FilterView(), this.#containers.filter);
-    render(new SortView(), this.#containers.event);
-    render(this.#listPoints, this.#containers.event);
-    this.#tripPoints.forEach((point) => this.#renderPoint(point));
+    render(new FilterView(this.#tripPoints.length), this.#containers.filter);
+
+    if (this.#tripPoints.length > 0) {
+      render(new TripInfoView(this.#tripPoints), this.#containers.tripInfo, RenderPosition.AFTERBEGIN);
+      render(new SortView(), this.#containers.event);
+      render(this.#listPoints, this.#containers.event);
+      this.#tripPoints.forEach((point) => this.#renderPoint(point));
+    } else {
+      render(new EmptyListView(), this.#containers.event);
+    }
   }
 
   #renderPoint(point) {

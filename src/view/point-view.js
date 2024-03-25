@@ -14,8 +14,7 @@ function createNewPointOfferTemplate(offer) {
 }
 
 function createNewPointTemplate(point) {
-  const { type, price, date, destination, offer, isFavorite } = point;
-  const { city } = destination;
+  const { type, city, price, date, offer, isFavorite } = point;
   const hours = getTimeInHours(date.startTime, date.endTime);
   const minutes = getTimeInMinutes(date.startTime, date.endTime);
   const eventFavoriteClass = isFavorite ? 'event__favorite-btn--active' : '';
@@ -57,8 +56,8 @@ function createNewPointTemplate(point) {
 }
 
 export default class PointView extends AbstractView {
-  #point;
-  #onEditClick;
+  #point = null;
+  #onEditClick = null;
 
   constructor({ point, onEditClick }) {
     super();

@@ -1,4 +1,4 @@
-import { CITY, DESCRIPTION } from "../const";
+import { CITY, DESCRIPTION } from '../const';
 
 const IMG_COUNT = 5;
 

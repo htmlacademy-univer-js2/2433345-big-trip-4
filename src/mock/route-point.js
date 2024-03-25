@@ -1,6 +1,6 @@
-import { TYPE_POINT, PRICE, OFFER, DATE, CITY } from "../const";
-import { getRandomArrayElement } from "../utils";
-import { getMockDestination } from "./destination";
+import { TYPE_POINT, PRICE, OFFER, DATE, CITY } from '../const';
+import { getRandomArrayElement } from '../utils';
+import { getMockDestination } from './destination';
 
 const BOUND = 4;
 
